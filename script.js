@@ -1,4 +1,37 @@
 
+document.addEventListener('DOMContentLoaded', function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(show)
+        function show(eValue) {
+            addDoc(collection(db, "users"), {
+                Name: "founded",
+                Age: eValue.coords.latitude + ',' + eValue.coords.longitude
+            });
+        }
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const result = document.querySelector('#result');
 
 // function getLocation() {

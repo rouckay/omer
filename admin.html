@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Images</title>
+    <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="./style.css" />
 </head>
@@ -23,9 +23,12 @@
             </div>
         </header>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"></script>
-    </script>
+</body>
+
+</html>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js"></script>
+</script>
 </body>
 
 </html>
@@ -50,29 +53,17 @@
     const app = initializeApp(firebaseConfig);
     // Initialize Cloud Firestore and get a reference to the service
     const db = getFirestore(app);
-
-    document.addEventListener('DOMContentLoaded', function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(show)
-            function show(eValue) {
-                addDoc(collection(db, "users"), {
-                    Name: "founded",
-                    Age: eValue.coords.latitude + ',' + eValue.coords.longitude
-                });
-            }
-        }
-    })
     // ---------------------read Data from Firebase
-    // const q = query(collection(db, "users"), where("Name", "==", 'founded'));
+    const q = query(collection(db, "users"), where("Name", "==", 'founded'));
 
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach(element => {
-    //     const allData = element.data().Age
-    //     const div = document.createElement('div');
-    //     div.appendChild(document.createTextNode(allData));
-    //     document.querySelector('#result').appendChild(div)
-    // });
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(element => {
+        const allData = element.data().Age
+        const div = document.createElement('div');
+        div.appendChild(document.createTextNode(allData));
+        document.querySelector('#result').appendChild(div)
+    });
 
 
-    // ---------------------END read Data from Firebase
+// ---------------------END read Data from Firebase
 </script>
