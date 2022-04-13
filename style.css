@@ -38,3 +38,28 @@
     width: 100px;
     text-align: center;
 }
+
+.list {
+    border: 3px solid rgb(0, 200, 170);
+    box-sizing: border-box;
+    margin-top: unset;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+    overflow: hidden;
+    border-radius: 0.8rem;
+}
+
+.close {
+    line-height: 1;
+    font-size: 10px !important;
+    display: block;
+    height: 4rem;
+    width: 4rem;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-size: cover;
+
+}
