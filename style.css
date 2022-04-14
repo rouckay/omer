@@ -61,5 +61,5 @@
     mask-position: center;
     mask-repeat: no-repeat;
     background-size: cover;
-
+    -webkit-mask-image: url(https://cdn-blog.novoresume.com/career-blog/images/icons/thin-x.svg);
 }

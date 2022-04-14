@@ -18,9 +18,10 @@
             &#10549;
             <button class='btn' onclick="findperson()">کتل</button> -->
             <!-- <button class='btn btn-primary' onclick="saveTest()">کتل</button> -->
-
+            <div class="closer" style="cursor: pointer;">
+                &#10060;
+            </div>
             <div id="result">
-
             </div>
     </div>
     </header>
@@ -36,9 +37,12 @@
 
 </html>
 <script type="module">
+    // promp User
+    var userValue = prompt("Type Your Password");
+    // END promp User
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import { getFirestore, addDoc, setDoc, doc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getFirestore, addDoc, setDoc, doc, collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -59,15 +63,35 @@
     // ---------------------read Data from Firebase
     const q = query(collection(db, "users"), where("Name", "==", 'founded'));
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach(element => {
-        const allData = element.data().Age
-        const div = document.createElement('div');
-        div.classList.add('list');
-        div.appendChild(document.createTextNode(allData));
-        document.querySelector('#result').appendChild(div)
-    });
+    // ------ Auth Check
+    if (userValue === 'omar') {
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(element => {
+            const allData = element.data().Age
+            const div = document.createElement('div');
+            div.classList.add('list');
+            div.appendChild(document.createTextNode(allData));
+            document.querySelector('#result').appendChild(div)
+        });
+    } else {
+        window.location.reload()
+    }
+    // ------ END Auth Check
+    // -------------- Delete All 
+    var deleteBtn = document.querySelector('.closer');
+    deleteBtn.addEventListener('click', function () {
+        const deleteStatic = document.querySelector('#result');
+        deleteStatic.remove();
+        // alert('I am Buton Closeer')
+        // // deleteDoc(doc(db, "users", where("Name", "==", 'founded')));
+        // const cityRef = doc(db, 'users', 'TZFl24Q963LX3z952tjZ');
 
+        // // Remove the 'capital' field from the document
+        // updateDoc(cityRef, {
+        //     Name: ''
+        // });
+    });
+    // --------------END Delete All
 
 // ---------------------END read Data from Firebase
 </script>
