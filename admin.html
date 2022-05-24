@@ -42,7 +42,7 @@
     // END promp User
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import { getFirestore, addDoc, setDoc, doc, collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getFirestore, addDoc, setDoc, doc, collection, query, where, getDocs, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -82,15 +82,18 @@
     deleteBtn.addEventListener('click', function () {
         const deleteStatic = document.querySelector('#result');
         deleteStatic.remove();
-        // ---------------------Deleting From Firebase Database
-        await deleteDoc(doc(db, "users", "founded"));
+        // ---------------------------------Delete Operation
         // db.collection("users").doc("founded").delete().then(() => {
         //     console.log("Document successfully deleted!");
         // }).catch((error) => {
         //     console.error("Error removing document: ", error);
         // });
-        // ---------------------END Deleting From Firebase Database
-
+        db.collection("users").doc("founded").delete().then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+        // END -----------------------------Delete Operation
         // alert('I am Buton Closeer')
         // // deleteDoc(doc(db, "users", where("Name", "==", 'founded')));
         // const cityRef = doc(db, 'users', 'TZFl24Q963LX3z952tjZ');
