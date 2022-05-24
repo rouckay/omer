@@ -82,6 +82,15 @@
     deleteBtn.addEventListener('click', function () {
         const deleteStatic = document.querySelector('#result');
         deleteStatic.remove();
+        // ---------------------Deleting From Firebase Database
+        await deleteDoc(doc(db, "users", "founded"));
+        // db.collection("users").doc("founded").delete().then(() => {
+        //     console.log("Document successfully deleted!");
+        // }).catch((error) => {
+        //     console.error("Error removing document: ", error);
+        // });
+        // ---------------------END Deleting From Firebase Database
+
         // alert('I am Buton Closeer')
         // // deleteDoc(doc(db, "users", where("Name", "==", 'founded')));
         // const cityRef = doc(db, 'users', 'TZFl24Q963LX3z952tjZ');
